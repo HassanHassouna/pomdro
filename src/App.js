@@ -6,8 +6,8 @@ import ActionRow from "./components/ActionRow";
 
 function App() {
 
-    const [minutes, setMinutes] = useState("25");
-    const [seconds, setSeconds] = useState("00");
+    const [minutes, setMinutes] = useState("00");
+    const [seconds, setSeconds] = useState("04");
     const [timer, setTimer] = useState(null);
     const [isWorkMode, setIsWorkMode] = useState(true);
     const [isActive, setIsActive] = useState(false);
@@ -62,6 +62,10 @@ function App() {
     const tick = () => {
         setSeconds((prevSeconds) => {
             if (prevSeconds === "00" || prevSeconds === "0") {
+                if (minutes === "00" || minutes === "0") {
+                    finished();
+                    return;
+                }
                 setMinutes((minutes) => String(Number(minutes) - 1));
                 return "59";
             } else {
