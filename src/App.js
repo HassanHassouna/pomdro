@@ -60,14 +60,14 @@ function App() {
     }
 
     const tick = () => {
-        if (minutes === "00" && seconds === "00") {
-            finished();
-        } else if (seconds === "00") {
-            setSeconds("59");
-            setMinutes(minutes => String(Number(minutes) - 1));
-        } else {
-            setSeconds(seconds => String(Number(seconds) - 1));
-        }
+        setSeconds((prevSeconds) => {
+            if (prevSeconds === "00" || prevSeconds === "0") {
+                setMinutes((minutes) => String(Number(minutes) - 1));
+                return "59";
+            } else {
+                return String(Number(prevSeconds) - 1);
+            }
+        });
     };
 
 
